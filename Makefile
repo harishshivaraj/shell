@@ -36,9 +36,10 @@ run: build
 run-local:
 	flask --app=pricing_engine run --host=$(HOST) --port=$(PORT)
 
-
 .PHONY: lint
 lint:
+	isort $(package_path)
+	black -l 120 $(package_path)
 	pylint --ignore=./tests $(package_path)
 
 .PHONY: clean
@@ -47,4 +48,4 @@ clean:
 
 .PHONY: test
 test:
-	pytest ./tests/test_pricing_engine.py
+	PYTHONPATH="." pytest ./tests/test_pricing_engine.py

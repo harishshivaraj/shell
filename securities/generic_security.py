@@ -20,8 +20,8 @@ class GenericSecurity:
         """
         if self.market_data_src:
             mkt_data = pd.read_csv(self.market_data_src, index_col=0)
-            mkt_data = mkt_data.sort_values(by='Date', ascending=False)
-            return mkt_data['Close'][0]
+            mkt_data = mkt_data.sort_values(by="Date", ascending=False)
+            return mkt_data["Close"][0]
 
         raise PricingEngineSecurityError("Market Data path not set")
 
@@ -30,6 +30,6 @@ class GenericSecurity:
 
 
 def get_security_object(security: str) -> GenericSecurity:
-    """ Factory class returns a security object given security name """
+    """Factory class returns a security object given the security name"""
     module = importlib.import_module(f"securities.{security.lower()}")
     return getattr(module, security)()

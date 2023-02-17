@@ -7,29 +7,26 @@ from jsonschema import validate
 from jsonschema.exceptions import ValidationError
 
 from instruments import INSTRUMENT_MAP, create_instrument
-from pricing_exceptions import (
-    PricingEngineException,
-    PricingEngineRFQValidationFailure,
-    PricingEngineInstrumentError
-)
+from pricing_exceptions import PricingEngineException, PricingEngineInstrumentError, PricingEngineRFQValidationFailure
 
 logger = logging.Logger(__name__)
 server = Flask(__name__)
 
 rfq_schema = {
     "type": "object",
+    "required": ["commodity", "putcall", "strike", "delivery", "type"],
     "properties": {
         "commodity": {"type": "string", "enum": ["BRN", "HH"]},
         "putcall": {"type": "string", "enum": ["CALL", "PUT"]},
-        "strike": {"type": "number"},
+        "strike": {"type": "number", "minimum": 0},
         "delivery": {"type": "string"},
         "type": {"type": "string", "enum": list(INSTRUMENT_MAP.keys())},
-    }
+    },
 }
 
 
 def validate_rfq(rfq: dict) -> None:
-    """ Validate given RFQ against the schema """
+    """Validate the given RFQ against the schema"""
     try:
         validate(rfq, schema=rfq_schema)
     except ValidationError as ex:
@@ -40,12 +37,12 @@ def validate_rfq(rfq: dict) -> None:
 @server.route("/price", methods=["POST"])
 def price():
     """
-    Entry point to option pricing server.
-    Accepts a post request with json payload. Payload consisting of option contract
-    requesting for quote.
+    The entry point to the option pricing server.
 
-    The contract must strictly follow the json structure bellow
+    Accepts a post request with JSON payload. Payload consisting of options contract
+    requesting for a quote.
 
+    The contract must strictly follow the JSON structure bellow
     {
         "commodity": "HH",
         "putcall": "PUT",
@@ -54,9 +51,8 @@ def price():
         "type": "VANILLA"
     }
 
-    On a successful response the quote for the contract will be return within the results
-    section in the json response. Shown bellow
-
+    On a successful response, the quote for the contract will be returned within the results
+    section in the JSON response. Shown bellow
     {
         "Results": {
             "PV": 32.30087
