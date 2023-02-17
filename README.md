@@ -7,19 +7,19 @@
 The project consists of a simple rest API to price options contracts using the Black Scholes model. The pricing model
 was built with certain assumption. Including constant market data, rates and volatility.
 
-    - Works only for European options
-    - With no dividend pay off
-    - With no markups charges included
-    - with each contract of 100 units
-    - With a constant interest rate
-    - With a constant volatility
+- Works only for European options
+- With no dividend pay off
+- With no markups charges included
+- With each contract of 100 units
+- With a constant interest rate
+- With a constant volatility
 
 The system was developed using python version 3.10 and tested on Kubuntu 22.10
 
 ### Requirements
 
-1. Docker
-2. Makefile
+- Docker 
+- Makefile
 
 ### Running the script
 
