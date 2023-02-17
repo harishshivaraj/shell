@@ -19,7 +19,7 @@ The system was developed using python version 3.10 and tested on Kubuntu 22.10
 ### Requirements
 
 - Docker 
-- Makefile
+- Make
 
 ### Running the script
 
