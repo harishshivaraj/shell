@@ -36,9 +36,9 @@ def test_rfq_request(client, rfq, pv):
         ({"commodity": "BRN", "putcall": "PUT1", "strike": 200, "delivery": "FEB-24", "type": "VANILLA"}, 400),
         ({"commodity": "HH", "putcall": "PUT", "strike": "edr", "delivery": "FEB-24", "type": "VANILLA"}, 400),
         ({"commodity": "HH", "putcall": "CALL", "strike": 200, "delivery": "FEB-24", "type": "VANILLA1"}, 400),
-        ({"commodity": "HH", "putcall": "CALL", "strike": 200, "delivery": "MAR-22", "type": "VANILLA1"}, 400),
-        ({"commodity": "HH", "putcall": "CALL", "strike": -200, "delivery": "MAR-22", "type": "VANILLA1"}, 400),
-        ({"commodity": "HH", "putcall": "CALL", "strike": -200, "delivery": "MAR-22"}, 400),
+        ({"commodity": "HH", "putcall": "CALL", "strike": 200, "delivery": "MAR-22", "type": "VANILLA"}, 400),
+        ({"commodity": "HH", "putcall": "CALL", "strike": -200, "delivery": "MAR-24", "type": "VANILLA"}, 400),
+        ({"commodity": "HH", "putcall": "CALL", "strike": 200, "delivery": "MAR-24"}, 400),
     ]
 )
 def test_validation(client, rfq, error_code):
