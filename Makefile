@@ -48,4 +48,4 @@ clean:
 
 .PHONY: test
 test:
-	PYTHONPATH="." pytest ./tests/test_pricing_engine.py
+	PYTHONPATH="." pytest -r ./tests/test_pricing_engine.py
