@@ -2,7 +2,7 @@ import logging
 from copy import deepcopy
 from http import HTTPStatus
 
-from flask import Flask, request
+from flask import Flask, Response, request
 from jsonschema import validate
 from jsonschema.exceptions import ValidationError
 
@@ -35,7 +35,7 @@ def validate_rfq(rfq: dict) -> None:
 
 
 @server.route("/price", methods=["POST"])
-def price():
+def price() -> Response:
     """
     The entry point to the option pricing server.
 
