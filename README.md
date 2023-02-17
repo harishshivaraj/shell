@@ -37,6 +37,21 @@ curl --location 'http://localhost:8008/price' --header 'Content-Type: applicatio
         "type": "VANILLA"
       }'
 ```
+Output:
+```
+{
+    "Results": {
+        "PV": 32.26476
+    },
+    "commodity": "HH",
+    "delivery": "FEB-24",
+    "expiry": "Dec-23",
+    "putcall": "PUT",
+    "strike": 2.5,
+    "type": "VANILLA"
+}
+```
+
 
 ### Running the tests
 
