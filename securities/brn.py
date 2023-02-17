@@ -10,9 +10,5 @@ class BRN(GenericSecurity):
 
     market_data_src = f"{Path(__file__).parent}/../market-data/BRN.csv"
 
-    def __init__(self):
-
-        print(Path(__file__).parent)
-
     def vol(self) -> float:
-        return 1.5
+        return 0.5

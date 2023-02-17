@@ -38,6 +38,8 @@ run-local:
 
 .PHONY: lint
 lint:
+	isort $(package_path)
+	black -l 120 $(package_path)
 	pylint --ignore=./tests $(package_path)
 
 .PHONY: clean
@@ -46,4 +48,4 @@ clean:
 
 .PHONY: test
 test:
-	pytest ./tests/test_pricing_engine.py
+	PYTHONPATH="." pytest ./tests/test_pricing_engine.py

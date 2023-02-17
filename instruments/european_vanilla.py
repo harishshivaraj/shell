@@ -1,3 +1,4 @@
+import calendar
 from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
@@ -9,8 +10,8 @@ from securities import get_security_object
 
 
 def last_day_of_month(day: datetime) -> datetime:
-    next_month = day.replace(day=28) + relativedelta(days=4)
-    return next_month - relativedelta(days=next_month.day)
+    _, last_day = calendar.monthrange(day.year, day.month)
+    return day.replace(day=last_day)
 
 
 class EuropeanVanilla(GenericInstrument):
@@ -21,7 +22,7 @@ class EuropeanVanilla(GenericInstrument):
     price_model = BlackScholes(rate=0.1)
 
     # pylint: disable=unused-argument
-    def __init__(self, commodity=None, strike=None, putcall=None, delivery=None, **kwargs):
+    def __init__(self, commodity=None, strike=None, putcall=None, delivery=None, **kwargs) -> None:
         self.delivery = delivery
         self.strike = strike
         self.putcall = putcall
@@ -38,7 +39,7 @@ class EuropeanVanilla(GenericInstrument):
         expiry = last_day_of_month(expiry - relativedelta(months=2))
 
         if expiry < today:
-            raise PricingEngineInstrumentError(f"Expiry date {expiry.strftime('%b-%y')} is in the past")
+            raise PricingEngineInstrumentError(f"Expiry date {expiry:%b-%y} is in the past")
 
         return (expiry - today).days / 365
 

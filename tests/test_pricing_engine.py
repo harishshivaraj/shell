@@ -12,8 +12,8 @@ def client() -> "FlaskClient":
 
 @pytest.mark.parametrize(
     "rfq, pv", [
-        ({"commodity": "BRN", "putcall": "CALL", "strike": 90, "delivery": "FEB-24", "type": "VANILLA"}, 4480.11311),
-        ({"commodity": "BRN", "putcall": "PUT", "strike": 200, "delivery": "FEB-24", "type": "VANILLA"}, 12620.30253),
+        ({"commodity": "BRN", "putcall": "CALL", "strike": 90, "delivery": "FEB-24", "type": "VANILLA"}, 1702.95664),
+        ({"commodity": "BRN", "putcall": "PUT", "strike": 80, "delivery": "FEB-24", "type": "VANILLA"}, 928.8332),
         ({"commodity": "HH", "putcall": "PUT", "strike": 1.5, "delivery": "FEB-24", "type": "VANILLA"}, 3.57784),
         ({"commodity": "HH", "putcall": "CALL", "strike": 3.0, "delivery": "FEB-24", "type": "VANILLA"}, 40.233),
     ]
@@ -37,6 +37,8 @@ def test_rfq_request(client, rfq, pv):
         ({"commodity": "HH", "putcall": "PUT", "strike": "edr", "delivery": "FEB-24", "type": "VANILLA"}, 400),
         ({"commodity": "HH", "putcall": "CALL", "strike": 200, "delivery": "FEB-24", "type": "VANILLA1"}, 400),
         ({"commodity": "HH", "putcall": "CALL", "strike": 200, "delivery": "MAR-22", "type": "VANILLA1"}, 400),
+        ({"commodity": "HH", "putcall": "CALL", "strike": -200, "delivery": "MAR-22", "type": "VANILLA1"}, 400),
+        ({"commodity": "HH", "putcall": "CALL", "strike": -200, "delivery": "MAR-22"}, 400),
     ]
 )
 def test_validation(client, rfq, error_code):

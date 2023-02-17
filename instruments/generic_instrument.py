@@ -11,7 +11,7 @@ class GenericInstrument:
     price_model = None
 
     def price(self) -> float:
-        """ Prices the contract against model provided """
+        """Prices the contract against model provided"""
         if self.price_model:
             mid = self.price_model.calculate(self)
             return round(mid, DECIMAL_PRECISION)

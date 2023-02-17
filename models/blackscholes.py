@@ -15,6 +15,8 @@ class BlackScholes:
         - With no dividend pay off
         - With no markups charges included
         - with each contract of 100 units
+        - With a constant interest rate
+        - With a constant volatility
     """
 
     def __init__(self, rate: float) -> None:

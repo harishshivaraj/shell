@@ -7,29 +7,26 @@ from jsonschema import validate
 from jsonschema.exceptions import ValidationError
 
 from instruments import INSTRUMENT_MAP, create_instrument
-from pricing_exceptions import (
-    PricingEngineException,
-    PricingEngineRFQValidationFailure,
-    PricingEngineInstrumentError
-)
+from pricing_exceptions import PricingEngineException, PricingEngineInstrumentError, PricingEngineRFQValidationFailure
 
 logger = logging.Logger(__name__)
 server = Flask(__name__)
 
 rfq_schema = {
     "type": "object",
+    "required": ["commodity", "putcall", "strike", "delivery", "type"],
     "properties": {
         "commodity": {"type": "string", "enum": ["BRN", "HH"]},
         "putcall": {"type": "string", "enum": ["CALL", "PUT"]},
-        "strike": {"type": "number"},
+        "strike": {"type": "number", "minimum": 0},
         "delivery": {"type": "string"},
         "type": {"type": "string", "enum": list(INSTRUMENT_MAP.keys())},
-    }
+    },
 }
 
 
 def validate_rfq(rfq: dict) -> None:
-    """ Validate the given RFQ against the schema """
+    """Validate the given RFQ against the schema"""
     try:
         validate(rfq, schema=rfq_schema)
     except ValidationError as ex:
