@@ -44,6 +44,6 @@ curl --location 'http://localhost:8008/price' --header 'Content-Type: applicatio
 
 `make run-dev`
 
-Now from the container shell console
+Now from the container shell
 
 `make test`
