@@ -4,8 +4,6 @@ import pytest
 
 from pricing_engine import server
 
-from flask import Response
-
 FlaskClient = "FlaskClient"
 
 
