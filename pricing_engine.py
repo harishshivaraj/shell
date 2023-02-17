@@ -78,6 +78,7 @@ def price() -> Response:
 
         # Calculate the PV
         quote["Results"] = {"PV": instrument.price()}
+        quote['expiry'] = f"{instrument.expiry_date:%b-%y}"
 
         error_code = HTTPStatus.OK
         content = quote

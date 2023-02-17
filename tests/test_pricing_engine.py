@@ -53,6 +53,18 @@ def test_validation(client: FlaskClient, rfq: dict, error_code: int) -> None:
     assert return_code == error_code
 
 
+@pytest.mark.parametrize(
+    "rfq, expiry_date", [
+        ({"commodity": "BRN", "putcall": "CALL", "strike": 200, "delivery": "FEB-24", "type": "VANILLA"}, "Dec-23"),
+        ({"commodity": "BRN", "putcall": "PUT", "strike": 200, "delivery": "SEP-24", "type": "VANILLA"}, "Jul-24"),
+    ]
+)
+def test_expiry_dates(client: FlaskClient, rfq: dict, expiry_date: str) -> None:
+    quote, return_code = get_quote(client, rfq)
+    assert return_code == 200
+    assert quote['expiry'] == expiry_date
+
+
 def test_call_price_boundary(client: FlaskClient) -> None:
     """ 90 call cannot be more expensive than 86 call """
     def rfq(strike: float) -> dict:

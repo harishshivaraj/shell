@@ -29,7 +29,7 @@ class EuropeanVanilla(GenericInstrument):
         self.underlying = get_security_object(commodity)
 
     @property
-    def expiry(self) -> float:
+    def expiry_date(self) -> datetime:
         expiry = datetime.strptime(self.delivery, "%b-%y")
         today = datetime.today()
 
@@ -41,7 +41,12 @@ class EuropeanVanilla(GenericInstrument):
         if expiry < today:
             raise PricingEngineInstrumentError(f"Expiry date {expiry:%b-%y} is in the past")
 
-        return (expiry - today).days / 365
+        return expiry
+
+    @property
+    def expiry(self) -> float:
+        today = datetime.today()
+        return (self.expiry_date - today).days / 365
 
     @property
     def spot(self) -> float:
