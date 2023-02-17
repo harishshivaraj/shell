@@ -1,6 +1,6 @@
 class PricingEngineException(Exception):
     """
-    Base exception class for Pricing Engine. This must be subclassed for more specific error.
+    Base exception class for Pricing Engine. This must be subclassed for the more specific error.
     """
 
     def __init__(self, message=None):

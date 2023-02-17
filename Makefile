@@ -36,7 +36,6 @@ run: build
 run-local:
 	flask --app=pricing_engine run --host=$(HOST) --port=$(PORT)
 
-
 .PHONY: lint
 lint:
 	pylint --ignore=./tests $(package_path)

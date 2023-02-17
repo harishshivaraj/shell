@@ -9,14 +9,12 @@ class BlackScholes:
     """
     Black Scholes Pricing model
 
-    This class implements the formula to price a single european vanilla option
-    with following assumption
-
-    - Works only for european options
-    - With no dividends pay off
-    - With no markups charges included
-    - with each contract of 100 units
-
+    This class implements the formula to price a single European vanilla option
+    with the following assumption
+        - Works only for European options
+        - With no dividend pay off
+        - With no markups charges included
+        - with each contract of 100 units
     """
 
     def __init__(self, rate: float) -> None:

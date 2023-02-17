@@ -4,8 +4,8 @@
 
 ### Option Pricing Engine using Black Scholes model
 
-The project consists of a simple rest API to price option contract using Black Scholes model. The pricing model
-was build certain assumption. Including constant market data, rates and volatility.
+The project consists of a simple rest API to price options contracts using the Black Scholes model. The pricing model
+was built certain assumption. Including constant market data, rates and volatility.
 
 Option Pricing server was developed on python version 3.10
 

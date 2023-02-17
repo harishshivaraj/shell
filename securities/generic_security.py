@@ -30,6 +30,6 @@ class GenericSecurity:
 
 
 def get_security_object(security: str) -> GenericSecurity:
-    """ Factory class returns a security object given security name """
+    """ Factory class returns a security object given the security name """
     module = importlib.import_module(f"securities.{security.lower()}")
     return getattr(module, security)()
