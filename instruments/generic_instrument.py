@@ -1,6 +1,6 @@
 from pricing_exceptions import PricingEngineInstrumentError
 
-DECIMAL_PRECISION = 5
+DECIMAL_PRECISION = 2
 
 
 class GenericInstrument:
