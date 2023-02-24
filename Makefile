@@ -29,7 +29,7 @@ run-dev: build-dev
 	docker run $(run_args) -v $(PWD):/shell $(IMAGE_NAME):$(TAG)-dev bash
 
 .PHONY: run
-run: build
+run: lint build
 	docker run $(run_args) $(IMAGE_NAME):$(TAG)
 
 .PHONY: run-local
