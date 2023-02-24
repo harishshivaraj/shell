@@ -18,8 +18,8 @@ def get_quote(client: FlaskClient, rfq: dict) -> tuple[dict, int]:
         "Content-Type": mimetype,
         "Accept": mimetype
     }
-    response = client.post('/price', data=json.dumps(rfq), headers=headers)
-    quote = json.loads(response.data.decode('utf-8'))
+    response = client.post("/price", data=json.dumps(rfq), headers=headers)
+    quote = json.loads(response.data.decode("utf-8"))
     return quote, response.status_code
 
 
@@ -34,7 +34,7 @@ def get_quote(client: FlaskClient, rfq: dict) -> tuple[dict, int]:
 def test_rfq_request(client: FlaskClient, rfq: dict, pv: float) -> None:
     quote, return_code = get_quote(client, rfq)
     assert return_code == 200
-    assert quote['Results']['PV'] == pv
+    assert quote["Results"]["PV"] == pv
 
 
 @pytest.mark.parametrize(
@@ -62,7 +62,7 @@ def test_validation(client: FlaskClient, rfq: dict, error_code: int) -> None:
 def test_expiry_dates(client: FlaskClient, rfq: dict, expiry_date: str) -> None:
     quote, return_code = get_quote(client, rfq)
     assert return_code == 200
-    assert quote['expiry'] == expiry_date
+    assert quote["expiry"] == expiry_date
 
 
 def test_call_price_boundary(client: FlaskClient) -> None:
@@ -73,4 +73,4 @@ def test_call_price_boundary(client: FlaskClient) -> None:
     quote1, _ = get_quote(client, rfq(strike=80))
     quote2, _ = get_quote(client, rfq(strike=90))
 
-    assert quote2['Results']['PV'] < quote1['Results']['PV']
+    assert quote2["Results"]["PV"] < quote1["Results"]["PV"]
