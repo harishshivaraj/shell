@@ -1,7 +1,11 @@
+import datetime
+
+import instruments.european_vanilla
 import json
 
 import pytest
 
+from freezegun import freeze_time
 from pricing_engine import server
 
 FlaskClient = "FlaskClient"
@@ -25,12 +29,13 @@ def get_quote(client: FlaskClient, rfq: dict) -> tuple[dict, int]:
 
 @pytest.mark.parametrize(
     "rfq, pv", [
-        ({"commodity": "BRN", "putcall": "CALL", "strike": 90, "delivery": "FEB-24", "type": "VANILLA"}, 1702.95664),
-        ({"commodity": "BRN", "putcall": "PUT", "strike": 80, "delivery": "FEB-24", "type": "VANILLA"}, 928.8332),
-        ({"commodity": "HH", "putcall": "PUT", "strike": 1.5, "delivery": "FEB-24", "type": "VANILLA"}, 3.57784),
-        ({"commodity": "HH", "putcall": "CALL", "strike": 3.0, "delivery": "FEB-24", "type": "VANILLA"}, 40.233),
+        ({"commodity": "BRN", "putcall": "CALL", "strike": 90, "delivery": "FEB-24", "type": "VANILLA"}, 1759.88),
+        ({"commodity": "BRN", "putcall": "PUT", "strike": 80, "delivery": "FEB-24", "type": "VANILLA"}, 948.99),
+        ({"commodity": "HH", "putcall": "PUT", "strike": 1.5, "delivery": "FEB-24", "type": "VANILLA"}, 3.86),
+        ({"commodity": "HH", "putcall": "CALL", "strike": 3.0, "delivery": "FEB-24", "type": "VANILLA"}, 41.94),
     ]
 )
+@freeze_time("2023, 2, 1")
 def test_rfq_request(client: FlaskClient, rfq: dict, pv: float) -> None:
     quote, return_code = get_quote(client, rfq)
     assert return_code == 200
